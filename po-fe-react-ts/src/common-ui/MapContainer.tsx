@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import React, { useEffect, useState } from 'react';
-import ReactMapboxGl, { GeoJSONLayer, Marker } from 'react-mapbox-gl';
+import ReactMapboxGl, { GeoJSONLayer, Marker, Popup } from 'react-mapbox-gl';
 import * as MapboxGL from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +20,7 @@ interface VesselValue {
     dest: Destination | undefined;
     eta: string | null;
     showRoute: boolean;
+    showPopup: boolean;
 }
 
 interface Destination {
@@ -31,8 +32,15 @@ interface Destination {
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        width: '50px',
-        maxHeight: '50px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    zeroMargin: {
+        margin: 0
+    },
+    popup: {
+        zIndex: 999
     },
   }));
 
@@ -48,17 +56,20 @@ const Map = ReactMapboxGl({
   };
 
 export const MapContainer = ({ data }: MapContainerProps): ReactElement => {  
+    const classes = useStyles();
     const [showRoutes, setShowRoutes] = useState<boolean[]>(new Array(data.length).fill(false));
+    const [showPopups, setShowPopups] = useState<boolean[]>(new Array(data.length).fill(false));
     const [vesselColors, setvesselColors] = useState<string[]>([]);
-    const originX = [-0.2416815, 51.5285582] as [number, number];
-    const destX = [-77.01239,38.91275] as [number, number];
 
       const onVesselClick = (index: number, dest?: Destination) => {
           let newShowRoutes = new Array(data.length).fill(false);
+          let newShowPopups = new Array(data.length).fill(false);
             if(dest){
                 newShowRoutes[index] = !showRoutes[index];
-                setShowRoutes(newShowRoutes)
+                setShowRoutes(newShowRoutes);
             }
+            newShowPopups[index] = !showPopups[index];
+            setShowPopups(newShowPopups)
       }
 
     const generateDistinctColors = (numOfColors: number) => {
@@ -95,16 +106,16 @@ export const MapContainer = ({ data }: MapContainerProps): ReactElement => {
       }
       
       return (
-          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <div className={classes.container}>
             <Map
+                // eslint-disable-next-line react/style-prop-object
                 style="mapbox://styles/mapbox/streets-v8"
                 containerStyle={{
-                height: '80vh',
-                width: '100vw',
-                margin: 0
+                    height: '80vh',
+                    width: '100vw',
+                    margin: 0
                 }}
                 zoom={[1]}
-                //onClick={onClickMap}
             >
                 <>
                 { 
@@ -116,8 +127,21 @@ export const MapContainer = ({ data }: MapContainerProps): ReactElement => {
                             anchor="bottom"
                             onClick={() => onVesselClick(index, vesselData.dest)}
                         >
-                            <DirectionsBoatIcon style={{color: `${vesselColors[index]}`}}/>
+                            <DirectionsBoatIcon style={{color: vesselData.dest === undefined ? 'grey' : vesselData.dest.location === "" ? 'grey' : `${vesselColors[index]}`}}/>
                         </Marker>
+                        {showPopups[index] &&
+                            <Popup
+                                coordinates={[vesselData.longitude,vesselData.latitude]}
+                                anchor="top"
+                                className={classes.popup}
+                                >
+                                <h5 className={classes.zeroMargin}>NAME:{vesselData.name}</h5>
+                                <h5 className={classes.zeroMargin}>IMO:{vesselData.IMO}</h5>
+                                <h5 className={classes.zeroMargin}>TYPE:{vesselData.type}</h5>
+                                <h5 className={classes.zeroMargin}>DEST:{ vesselData.dest === undefined ? 'IDLE' : vesselData.dest.location === "" ? 'IDLE' : `${vesselData.dest.country}-${vesselData.dest.location}`}</h5>
+                                <h5 className={classes.zeroMargin}>ETA:{vesselData.eta}</h5> 
+                            </Popup>
+                        }
                         {showRoutes[index] && vesselData.dest && 
                         <>
                             <GeoJSONLayer

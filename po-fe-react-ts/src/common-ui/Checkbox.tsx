@@ -1,26 +1,18 @@
 import type { ReactElement } from 'react';
-import { useState, ChangeEvent } from 'react';
-import { FormControlLabel, Checkbox as MuiCheckbox } from '@material-ui/core';
+import { FormControlLabel, Checkbox as MuiCheckbox, CheckboxProps as MuiCheckboxProps } from '@material-ui/core';
 
-export interface CheckboxProps {
+export interface CheckboxProps extends MuiCheckboxProps{
     label: string;
 }
 
-export const Checkbox = ({ label }: CheckboxProps): ReactElement => { 
+export const Checkbox = ({ label, checked, onChange }: CheckboxProps): ReactElement => { 
     
-    const [state, setState] = useState({
-        checkedB: true,
-      });
-    
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-      };
     return (
         <FormControlLabel
             control={
             <MuiCheckbox
-                checked={state.checkedB}
-                onChange={handleChange}
+                checked={checked}
+                onChange={onChange}
                 name="checkedB"
                 color="primary"
             />
