@@ -1,0 +1,132 @@
+export const exampleData = [
+    {    
+      longitude: -81.483333,
+      latitude: 39.2,
+      IMO: 0,
+      name: "XIANGXINHUAJI0668",
+      type: 70,
+      dest: undefined,
+      eta: null,
+        showRoute: false,
+    },
+    {    
+      longitude: 30.526714,
+      latitude: 39.766193,
+      IMO: 0,
+      name: "SEA GULL",
+      type: 70,
+      dest: undefined,
+      eta: null,
+showRoute: false,
+    },
+    {    
+      longitude: -58.381592,
+      latitude:  -34.603722,
+      IMO: 0,
+      name: "KOELN",
+      type: 99,
+      dest: {
+        country: "AL",
+        location: "ROM",
+        name: "Romano Port",
+        coordinates: [19.416667, 41.366667] as [number, number]
+    },
+      eta: null,
+showRoute: false,
+    },
+    {    
+      longitude: 30.308611,
+      latitude: 59.937500,
+      IMO: 0,
+      name: "PEPITO",
+      type: 36,
+      dest: undefined,
+      eta: null,
+showRoute: false,
+    },
+    {    
+      longitude: 150.923141,
+      latitude: -33.920921,
+      IMO: 8728579,
+      name: "SEUASTOPOLETS1",
+      type: 10,
+      dest: {
+        country: "AT",
+        location: "BRD",
+        name: "Brand",
+        coordinates: [9.733333, 47.1] as [number, number]
+    },
+      eta: "2022-01-01T18:00:00.000Z",
+      showRoute: false,
+    },
+    {    
+      longitude: 122.25971,
+      latitude: 29.94885,
+      IMO: 0,
+      name: "HUI HANG 17",
+      type: 81,
+      dest: {
+        country: "FR",
+        location: "GRX",
+        name: "Greux",
+        coordinates: [48.45, -5.683333] as [number, number]
+    },
+      eta: "2022-08-31T11:00:00.000Z",
+      showRoute: false,
+    },
+    {    
+      longitude: 120.17246,
+      latitude: 31.92327,
+      IMO: 0,
+      name: "YUXINHUO11818",
+      type: 70,
+      dest: undefined,
+      eta: null,
+showRoute: false,
+    },
+    {    
+      longitude: 5.22565,
+      latitude: 53.365,
+      IMO: 8281,
+      name: "ALBATROS",
+      type: 36,
+      dest: {
+        country: "NL",
+        location: "AMS",
+        name: "Amsterdam",
+        coordinates: [52.4, -4.816667] as [number, number]
+    },
+      eta: "2022-04-15T10:00:00.000Z",
+      showRoute: false,
+    },
+    {    
+      longitude: 4.29184,
+      latitude: 51.88463,
+      IMO: 0,
+      name: "SOMTRANS XVIII",
+      type: 20,
+      dest: {
+        country: "IT",
+        location: "LL8",
+        name: "Gallignano",
+        coordinates: [45.433333, -9.833333] as [number, number]
+    },
+      eta: "2022-08-31T08:00:00.000Z",
+      showRoute: false,
+    },
+    {    
+      longitude: 121.95559,
+      latitude: 29.89037,
+      IMO: 0,
+      name: "DONGBO12",
+      type: 33,
+      dest: {
+          country: "US",
+          location: "DMB",
+          name: "Double Springs",
+          coordinates: [34.15, -87.4] as [number, number]
+      },
+      eta: "2022-07-18T17:30:00.000Z",
+      showRoute: false,
+    }
+];
