@@ -1,7 +1,9 @@
 import express from 'express';
-import { makeSearch } from '../controllers/searches';
-const router = express.Router();
+import { makeSearch, upload } from '../controllers/searches';
 
-router.post('/search', makeSearch);
+const searchRouter = express.Router();
 
-export = router;
+searchRouter.post('/search', makeSearch);
+searchRouter.put('/upload', upload);
+
+export default searchRouter;

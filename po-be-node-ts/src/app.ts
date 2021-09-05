@@ -1,9 +1,11 @@
 import http from 'http';
 import express, { Express } from 'express';
-import routes from './routes/searches';
+import searchRouter from './routes/searches';
+import portRouter from './routes/port.route';
+import {connect} from './configs/database'
 
 const router: Express = express();
-
+connect();
 /** Parse the request */
 router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
@@ -24,7 +26,8 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
-router.use('/', routes);
+router.use('/search', searchRouter);
+router.use('/port', portRouter);
 
 /** Error handling */
 router.use((req, res, next) => {
