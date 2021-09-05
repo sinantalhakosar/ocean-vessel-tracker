@@ -1,12 +1,14 @@
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
-import { Homepage } from './routes/Homepage';
+import { SearchPage } from './routes/Searchpage';
+import { UploadPage } from './routes/UploadPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-          <Route path="/" component={Homepage} />
-          <Redirect from="*" to="/" />
+          <Route path="/search" component={SearchPage} />
+          <Route path="/upload" component={UploadPage} />
+          <Redirect from="*" to="/search" />
       </Switch>
     </BrowserRouter>
   );

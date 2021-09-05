@@ -9,10 +9,10 @@ import Help from '@material-ui/icons/Help';
 import clsx from 'clsx';
 
 export interface SearchFieldsFormProps {
-    onSubmit?: () => void;
+    onSubmit: (formValues: FormData) => void;
 }
 
-interface FormData {
+export interface FormData {
     selectedPort: string;
     startDate:Date | null;
     endDate:Date | null;
@@ -116,11 +116,11 @@ const useStyles = makeStyles((theme) => ({
             showIdleVessels: event.target.checked
         });
     }
-    const handleFormSubmit = async (e: any) => {
+    const handleFormSubmit = async (e: any, onSubmitFunc: (formValues: FormData) => void) => {
         e.preventDefault();
         if (formIsValid()) {
           //await postContactForm(values);
-          console.log(values)
+          onSubmitFunc(values)
           alert("You've posted your form!")
         }
     };
@@ -163,7 +163,7 @@ export const SearchFieldsForm = ({ onSubmit }: SearchFieldsFormProps): ReactElem
     
     return (
     <div className={classes.container}>
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={(event) => handleFormSubmit(event, onSubmit)}>
         <Grid container justifyContent="center" spacing={2} className={classes.mediumMarginBottom}>
         <Grid item xs={1}></Grid>
         <Grid item xs={2} className={classes.centerChildren}>
