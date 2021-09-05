@@ -13,6 +13,7 @@ export const PortSchema: Schema = new Schema({
         default: [0,0]
     },
 });
+
 PortSchema.pre("save", function(next) {
   let now = new Date();
   if (!this.createdAt) {

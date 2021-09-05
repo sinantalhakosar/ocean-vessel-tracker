@@ -3,27 +3,23 @@ import express, { Express } from 'express';
 import searchRouter from './routes/searches';
 import portRouter from './routes/port.route';
 import {connect} from './configs/database'
+var cors = require('cors');
+
+// use it before all route definitions
 
 const router: Express = express();
 connect();
+
+router.use(cors({origin: 'http://localhost:5000'}));
 /** Parse the request */
 router.use(express.urlencoded({ extended: false }));
 /** Takes care of JSON data */
 router.use(express.json());
 
-/** RULES OF OUR API */
-router.use((req, res, next) => {
-    // set the CORS policy
-    res.header('Access-Control-Allow-Origin', '*');
-    // set the CORS headers
-    res.header('Access-Control-Allow-Headers', 'origin, X-Requested-With,Content-Type,Accept, Authorization');
-    // set the CORS method headers
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST');
-        return res.status(200).json({});
-    }
-    next();
-});
+
+router.use(express.json({limit: '50mb'}));
+router.use(express.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
+
 
 /** Routes */
 router.use('/search', searchRouter);

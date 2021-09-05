@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { Port } from '../models/ports';
-import { createNewPort } from '../repo/ports';
+import { createAISData, deleteAllAISData, findAISDataByFilters } from '../repo/search.repo';
 import { IPort } from "../types/ports";
+import { IFilter, ISearch } from "../types/search";
 
 interface Search {
     port: string;
@@ -12,55 +13,36 @@ interface Search {
 }
 
 export const upload = async (req: Request, res: Response, next: NextFunction) => {
-    const file = req.body;
-    console.log(file)
-    //const base64data = file.content.replace(/^data:.*,/, '');
+    try {
+        const newUploadData: Array<ISearch> = req.body;
+        if(newUploadData.length > 0){
+            await deleteAllAISData();
+            for (const search of newUploadData) {
+                await createAISData(search);
+            }
+            return res.status(200).json({
+                message: 'New data loaded'
+            });
+        }
+        return res.status(400).json({
+            message: 'Bad request'
+        });    
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Internal server error'
+        });    
+    }
+    
+    
 }
 
 export const makeSearch = async (req: Request, res: Response, next: NextFunction) => {
-    // get the data from req.body
-    // let port: string = req.body.port;
-    // let startDate: string = req.body.startDate;
-    // let endDate: string = req.body.endDate;
-    // let distance: number = req.body.distance;
-    // let showIdles: boolean = req.body.showIdles;
-    // add the post
-    console.log(req)
+    let filters: IFilter = req.body;
 
-    // const ports: IPort[] = [
-    //     {country: "AL", location: "ROM", name: "Romano Port", coordinates: [19.416667, 41.366667]},
-    //     {
-    //         country: "AT",
-    //         location: "BRD",
-    //         name: "Brand",
-    //         coordinates: [9.733333, 47.1] as [number, number]
-    //     },
-    //     {
-    //         country: "FR",
-    //         location: "GRX",
-    //         name: "Greux",
-    //         coordinates: [48.45, -5.683333] as [number, number]
-    //     },
-    //     {
-    //         country: "NL",
-    //         location: "AMS",
-    //         name: "Amsterdam",
-    //         coordinates: [52.4, -4.816667] as [number, number]
-    //     },
-    //     {
-    //         country: "IT",
-    //         location: "LL8",
-    //         name: "Gallignano",
-    //         coordinates: [45.433333, -9.833333] as [number, number]
-    //     },
-    //   ];
+    const result = await findAISDataByFilters(filters)
+    console.log(result)
 
-    //   for (const port of ports) {
-    //     createNewPort(port)
-    //     console.log(`Created user ${port.country} ${port.location}`);
-    //   }
-
-    // return response
+    
     return res.status(200).json({
         message: 'response.data'
     });
