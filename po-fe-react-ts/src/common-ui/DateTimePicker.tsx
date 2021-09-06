@@ -11,7 +11,8 @@ export const DateTimePicker = ({ label, onChange }: DateTimePickerProps): ReactE
     const todaysDate = new Date().toLocaleString().split(',')[0];
 
     const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-        onChange(new Date(event.target.value));
+        const selectedDate = new Date(event.target.value);
+        onChange(selectedDate);
     };
 
     const todaysDefaultDate = useMemo(() => {

@@ -8,26 +8,28 @@ import DirectionsBoatIcon from '@material-ui/icons/DirectionsBoat';
 import DockIcon from '@material-ui/icons/Dock';
 
 export interface MapContainerProps {
-    data: VesselValue[]
+    vesselsData:{
+        port: {
+            Latitude: number;
+            Longitude: number;
+        }
+        vessels: VesselValue[];
+    }
 }
 
 interface VesselValue {
-    name: string;
+    _id: string;
+    ETA: string | null;
     IMO: number;
-    type: number;
-    longitude: number;
-    latitude: number;
-    dest: Destination | undefined;
-    eta: string | null;
+    LATITUDE: number;
+    LONGITUDE: number;
+    DEST: string;
+    NAME: string;
+    SOG: number;
+    TIME: string;
+    TYPE: number;
     showRoute: boolean;
     showPopup: boolean;
-}
-
-interface Destination {
-    country: string;
-    location: string;
-    name: string;
-    coordinates: [number, number]
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -55,15 +57,16 @@ const Map = ReactMapboxGl({
     'line-width': 5
   };
 
-export const MapContainer = ({ data }: MapContainerProps): ReactElement => {  
+export const MapContainer = ({ vesselsData }: MapContainerProps): ReactElement => {  
+    console.log(vesselsData)
     const classes = useStyles();
-    const [showRoutes, setShowRoutes] = useState<boolean[]>(new Array(data.length).fill(false));
-    const [showPopups, setShowPopups] = useState<boolean[]>(new Array(data.length).fill(false));
+    const [showRoutes, setShowRoutes] = useState<boolean[]>(new Array(vesselsData.vessels.length).fill(false));
+    const [showPopups, setShowPopups] = useState<boolean[]>(new Array(vesselsData.vessels.length).fill(false));
     const [vesselColors, setvesselColors] = useState<string[]>([]);
-
-      const onVesselClick = (index: number, dest?: Destination) => {
-          let newShowRoutes = new Array(data.length).fill(false);
-          let newShowPopups = new Array(data.length).fill(false);
+    
+      const onVesselClick = (index: number, dest?: string) => {
+          let newShowRoutes = new Array(vesselsData.vessels.length).fill(false);
+          let newShowPopups = new Array(vesselsData.vessels.length).fill(false);
             if(dest){
                 newShowRoutes[index] = !showRoutes[index];
                 setShowRoutes(newShowRoutes);
@@ -81,8 +84,8 @@ export const MapContainer = ({ data }: MapContainerProps): ReactElement => {
     }
 
     useEffect(() => {
-        setvesselColors(generateDistinctColors(data.length));
-    },[data.length]);
+        setvesselColors(generateDistinctColors(vesselsData.vessels.length));
+    },[vesselsData.vessels.length]);
 
       const constructGeoJsonFileForRoute = (vesselCoord: [number, number], destCoord: [number, number]) => {
         return {
@@ -119,37 +122,38 @@ export const MapContainer = ({ data }: MapContainerProps): ReactElement => {
             >
                 <>
                 { 
-                    data.map((vesselData, index) => (
+                    vesselsData.vessels.map((vesselData, index) => (
                         <>
+                        
                         <Marker
                             key={index}
-                            coordinates={[vesselData.longitude,vesselData.latitude]}
+                            coordinates={[vesselData.LONGITUDE,vesselData.LATITUDE]}
                             anchor="bottom"
-                            onClick={() => onVesselClick(index, vesselData.dest)}
+                            onClick={() => onVesselClick(index, vesselData.DEST)}
                         >
-                            <DirectionsBoatIcon style={{color: vesselData.dest === undefined ? 'grey' : vesselData.dest.location === "" ? 'grey' : `${vesselColors[index]}`}}/>
+                            <DirectionsBoatIcon style={{color: vesselData.DEST === undefined ? 'grey' : vesselData.DEST === "" ? 'grey' : `${vesselColors[index]}`}}/>
                         </Marker>
+                        
                         {showPopups[index] &&
                             <Popup
-                                coordinates={[vesselData.longitude,vesselData.latitude]}
+                                coordinates={[vesselData.LONGITUDE,vesselData.LATITUDE]}
                                 anchor="top"
                                 className={classes.popup}
                                 >
-                                <h5 className={classes.zeroMargin}>NAME:{vesselData.name}</h5>
+                                <h5 className={classes.zeroMargin}>NAME:{vesselData.NAME}</h5>
                                 <h5 className={classes.zeroMargin}>IMO:{vesselData.IMO}</h5>
-                                <h5 className={classes.zeroMargin}>TYPE:{vesselData.type}</h5>
-                                <h5 className={classes.zeroMargin}>DEST:{ vesselData.dest === undefined ? 'IDLE' : vesselData.dest.location === "" ? 'IDLE' : `${vesselData.dest.country}-${vesselData.dest.location}`}</h5>
-                                <h5 className={classes.zeroMargin}>ETA:{vesselData.eta}</h5> 
+                                <h5 className={classes.zeroMargin}>DEST:{vesselData.DEST === undefined ? 'IDLE' : vesselData.DEST === "" ? 'IDLE' :  `${vesselData.DEST}`}</h5>
+                                <h5 className={classes.zeroMargin}>ETA:{vesselData.ETA}</h5> 
                             </Popup>
                         }
-                        {showRoutes[index] && vesselData.dest && 
+                        {showRoutes[index] && vesselData.DEST && 
                         <>
                             <GeoJSONLayer
-                            data={constructGeoJsonFileForRoute([vesselData.longitude,vesselData.latitude], vesselData.dest.coordinates)}
+                            data={constructGeoJsonFileForRoute([vesselData.LONGITUDE,vesselData.LATITUDE], [vesselsData.port.Longitude, vesselsData.port.Latitude])}
                             linePaint={linePaint}
                             />
                             <Marker
-                            coordinates={vesselData.dest?.coordinates}
+                            coordinates={[vesselsData.port.Longitude, vesselsData.port.Latitude]}
                             anchor="bottom"
                             >
                                 <DockIcon/>

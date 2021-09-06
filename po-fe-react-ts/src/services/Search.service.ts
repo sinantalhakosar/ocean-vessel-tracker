@@ -11,12 +11,17 @@ export const searchWithFilters = (filterValues: FormData) => {
 
     return fetch(`${localURL}/search/search`, requestOptions)
         .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(user)
-
-            return user;
+        .then(data => {
+            return data;
         });
+}
+
+export const getPorts = async () => {
+    const requestOptions = {
+        method: 'GET',
+      };
+    
+    return fetch(`${localURL}/port/get-ports`, requestOptions).then(data => data.json())
 }
 
 

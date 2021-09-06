@@ -9,6 +9,7 @@ import Help from '@material-ui/icons/Help';
 import clsx from 'clsx';
 
 export interface SearchFieldsFormProps {
+    ports: Array<{UNLOCODE:string, Name: string}>;
     onSubmit: (formValues: FormData) => void;
 }
 
@@ -146,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
     };
   }
 
-export const SearchFieldsForm = ({ onSubmit }: SearchFieldsFormProps): ReactElement => {  
+export const SearchFieldsForm = ({ ports, onSubmit }: SearchFieldsFormProps): ReactElement => {  
     const classes = useStyles();
 
     const {
@@ -160,7 +161,6 @@ export const SearchFieldsForm = ({ onSubmit }: SearchFieldsFormProps): ReactElem
         errors
       } = useFormControls();
 
-    
     return (
     <div className={classes.container}>
     <form onSubmit={(event) => handleFormSubmit(event, onSubmit)}>
@@ -169,20 +169,22 @@ export const SearchFieldsForm = ({ onSubmit }: SearchFieldsFormProps): ReactElem
         <Grid item xs={2} className={classes.centerChildren}>
             <Select
                 label='Port'
-                options={[{value: 'AED', label: 'Emirates'}, {value: 'TR', label: 'Turkey'}]}
+                options={ports.map((port, index) => {
+                    return {value: port.UNLOCODE, label: `${port.UNLOCODE} ${port.Name}`}
+                })}
                 onChange={(value) => handlePortChange(value)}
             />
         </Grid>
         <Grid item xs={2} className={classes.centerChildren}>
             <DateTimePicker
                 label="start date"
-                onChange={(date) => handleStartDateChange(date)}
+                onChange={handleStartDateChange}
             />
         </Grid>
         <Grid item xs={2} className={classes.centerChildren}>
             <DateTimePicker
                 label="end date"
-                onChange={(date) => handleEndDateChange(date)}
+                onChange={handleEndDateChange}
             />
         </Grid>
         <Grid item xs={2} className={clsx(classes.centerChildren, classes.elementWithTooltipWrapper)}>

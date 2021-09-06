@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
-import { useState, ChangeEvent } from 'react';
-import { FormControl, InputLabel, Select as MuiSelect, MenuItem } from '@material-ui/core';
+import { useState, ChangeEvent, useEffect } from 'react';
+import { FormControl, TextField } from '@material-ui/core';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
 
 export interface SelectProps {
@@ -20,28 +21,39 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  const filterOptions = createFilterOptions({
+    matchFrom: 'any',
+    limit: 500,
+    stringify: (option: PortOptionType) => option.label,
+  });
+
+interface PortOptionType {
+    value: string;
+    label: string;
+}
+
 export const Select = ({ label, options, onChange }: SelectProps): ReactElement => {  
     const classes = useStyles();
     const [selected, setSelected] = useState<string>('');
 
-    const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
-        setSelected(event.target.value as string);
-        onChange(event.target.value as string);
+    const handleChange = (event: ChangeEvent<{}>, value: string | undefined) => {
+      if(value){
+        setSelected(value);
+        onChange(value);
+      }
     };
-
     return (
       <FormControl variant="outlined" className={classes.container}>
-        <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
-        <MuiSelect
-          value={selected}
-          onChange={handleChange}
-          label={label}
-          fullWidth={true}
-        >
-        {options.map((option, index) => (
-            <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
-        ))}
-        </MuiSelect>
+        <Autocomplete
+          options={options}
+          getOptionLabel={(option) => option.label}
+          onChange={(event, value) => handleChange(event, value?.label)}
+          filterOptions={filterOptions}
+          style={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Custom filter" variant="outlined" />}
+        />
       </FormControl>
+
+
     );
   };
