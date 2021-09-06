@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Port } from '../models/ports';
-import { createAISData, deleteAllAISData, findAISDataByFilters } from '../repo/search.repo';
+import { createAISData, deleteAllAISData } from '../repo/search.repo';
+import { findAISDataByFilters } from '../services/search.service';
 import { IPort } from "../types/ports";
 import { IFilter, ISearch } from "../types/search";
 
@@ -37,13 +38,9 @@ export const upload = async (req: Request, res: Response, next: NextFunction) =>
 }
 
 export const makeSearch = async (req: Request, res: Response, next: NextFunction) => {
-    let filters: IFilter = req.body;
-
+    let filters = req.body;
+    console.log(filters)
     const result = await findAISDataByFilters(filters)
-    console.log(result)
 
-    
-    return res.status(200).json({
-        message: 'response.data'
-    });
+    return res.status(200).json({data:result});
 };

@@ -1,8 +1,8 @@
 import express from 'express';
-import { addPort } from '../controllers/port.controller';
+import { getAllUnlocodeOfPorts } from '../controllers/port.controller';
 
 const portRouter = express.Router();
 
-portRouter.post('/add-port', addPort);
+portRouter.get('/get-ports', getAllUnlocodeOfPorts);
 
 export default portRouter;

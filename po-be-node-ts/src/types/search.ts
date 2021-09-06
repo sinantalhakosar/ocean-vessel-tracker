@@ -11,9 +11,10 @@ export interface ISearch {
 }
 
 export interface IFilter {
-    selectedPort: string;
-    startDate: Date;
-    endDate: Date;
+    country: string;
+    location: string;
+    startDate: string;
+    endDate: string;
     distance: number;
     showIdleVessels: boolean;
 }
