@@ -33,6 +33,11 @@ Problem: Map should be centered, but when you zoom and click the vessel based on
 
 My Proposal: Understand the MapBox more clear and use it (defined properties/options) in proper way
 
+#### Renew need on each upload
+Problem: Everytime before uploading the file, refresh needed
+
+My Proposal: Removing the value for `<input>` element might help.
+
 #### Uploaded data size
 Problem: When any one tried to upload huge file, BE will throw `payload is huge` error.
 

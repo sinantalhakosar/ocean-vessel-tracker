@@ -28,11 +28,15 @@ export const FileUpload = ({onUpload}: FileUploadProps): ReactElement => {
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
         fileReader.onload = async (e) => {
-            const uploadResponse = await onUpload(JSON.parse(fileReader.result as string))
-            if(uploadResponse.message !== 'New data loaded'){
-                alert('There are some error on file upload');
-            }else {
-                alert('File uploaded successfully');
+            try{
+                const uploadResponse = await onUpload(JSON.parse(fileReader.result as string))
+                if(uploadResponse.message !== 'New data loaded'){
+                    alert('There are some error on file upload');
+                }else {
+                    alert('File uploaded successfully');
+                }
+            }catch(error){
+                alert(error);
             }
         };
       };

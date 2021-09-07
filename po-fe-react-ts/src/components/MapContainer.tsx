@@ -75,7 +75,7 @@ export const MapContainer = ({ vesselsData }: MapContainerProps): ReactElement =
     const generateDistinctColors = (numOfColors: number) => {
         let colorArray = []
         for(let i = 0; i < 360; i += 360 / numOfColors) {
-            colorArray.push(`hsl(${0},${100}%,${0}%)`);
+            colorArray.push(`hsl(${i},${90 + Math.random() * 10}%,${50 + Math.random() * 10}%)`);
         }
         return colorArray;
     }
