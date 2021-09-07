@@ -1,4 +1,4 @@
-import { Search, ISearchModel } from '../models/search.model';
+import { Search } from '../models/search.model';
 import { ISearch, IFilter } from '../types/search.type';
 
 /**

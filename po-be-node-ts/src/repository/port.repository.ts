@@ -1,5 +1,4 @@
 import { Port, IPortModel } from '../models/port.model';
-import { IPort } from '../types/port.type';
 
 /**
  * Query for getting all ports' records

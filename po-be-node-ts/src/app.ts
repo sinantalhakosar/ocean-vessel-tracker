@@ -3,10 +3,10 @@ import express, { Express } from 'express';
 import searchRouter from './routes/search.route';
 import portRouter from './routes/port.route';
 import {connect} from './configs/database.config'
+import { config } from 'dotenv';
+import path from 'path';
 
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
-
+config({ path: path.resolve(__dirname, '../.env') })
 var cors = require('cors');
 
 const router: Express = express();
