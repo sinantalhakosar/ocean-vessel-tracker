@@ -4,7 +4,6 @@ import { IPort } from "../types/port.type";
 
 export const addPort = async (req: Request, res: Response, next: NextFunction) => {
     let port: IPort = req.body;
-    console.log(req.body)
 
     return res.status(200).json({
         message: 'response.data'

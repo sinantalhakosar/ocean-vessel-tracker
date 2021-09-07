@@ -4,13 +4,13 @@ let database: mongoose.Connection;
 
 export const connect = () => {
 
-    const url = "mongodb+srv://ocean_user:1234@cluster0.bfcxb.mongodb.net/OceanDB?retryWrites=true&w=majority";
+    const DB_CONNECTION_URI = process.env.DB_CONNECTION_URI!;
 
     if (database) {
         return;
     }
     
-    mongoose.connect(url, {
+    mongoose.connect(DB_CONNECTION_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     } as mongoose.ConnectOptions);
