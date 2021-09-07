@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useState, ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 import { FormControl, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,11 +34,9 @@ interface PortOptionType {
 
 export const Select = ({ label, options, onChange }: SelectProps): ReactElement => {  
     const classes = useStyles();
-    const [selected, setSelected] = useState<string>('');
 
     const handleChange = (event: ChangeEvent<{}>, value: string | undefined) => {
       if(value){
-        setSelected(value);
         onChange(value);
       }
     };

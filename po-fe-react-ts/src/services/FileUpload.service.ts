@@ -23,11 +23,9 @@ export const upload = (stringifiedFile: Array<any>) => {
 
     return fetch(`${localURL}/search/upload`, requestOptions)
         .then(handleResponse)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            console.log(user)
-
-            return user;
+        .then(data => {
+            console.log(data)
+            return data;
         });
 }
 

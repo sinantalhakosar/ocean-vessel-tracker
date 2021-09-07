@@ -13,7 +13,6 @@ export const Checkbox = ({ label, checked, onChange }: CheckboxProps): ReactElem
             <MuiCheckbox
                 checked={checked}
                 onChange={onChange}
-                name="checkedB"
                 color="primary"
             />
             }

@@ -142,8 +142,7 @@ const useStyles = makeStyles((theme) => ({
         handleDistanceChange,
         handleShowOnlyIdleCheck,
         handleFormSubmit,
-        formIsValid,
-        errors
+        formIsValid
     };
   }
 
@@ -157,8 +156,7 @@ export const SearchFieldsForm = ({ ports, onSubmit }: SearchFieldsFormProps): Re
         handleDistanceChange,
         handleShowOnlyIdleCheck,
         handleFormSubmit,
-        formIsValid,
-        errors
+        formIsValid
       } = useFormControls();
 
     return (
