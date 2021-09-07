@@ -8,7 +8,7 @@ let database: mongoose.Connection;
  */
 export const connect = () => {
 
-    const DB_CONNECTION_URI = process.env.DB_CONNECTION_URI!;
+    const DB_CONNECTION_URI = process.env.DB_CONNECTION_URI! ?? '';
 
     if (database) {
         return;
