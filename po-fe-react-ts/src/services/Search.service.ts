@@ -2,7 +2,6 @@ import { localURL } from '../utils/url.util';
 import { FormData } from '../components/SearchFieldsForm';
 
 export const searchWithFilters = (filterValues: FormData) => {
-    console.log(filterValues)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

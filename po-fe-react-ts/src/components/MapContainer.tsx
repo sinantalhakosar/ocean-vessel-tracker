@@ -47,9 +47,8 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Map = ReactMapboxGl({
-    accessToken: 'pk.eyJ1Ijoic3RhbGhha29zYXIiLCJhIjoiY2t0NjhpMW1vMGcxajJwcXM4ZWFmYWU4dCJ9.hwtRQtUit-oFBkcdcuk5bQ',
+    accessToken: process.env.REACT_APP_MAPBOX_API_KEY ?? '',
     renderWorldCopies: false,
-    scrollZoom: false,
   });
 
   const linePaint: MapboxGL.LinePaint = {
@@ -58,7 +57,6 @@ const Map = ReactMapboxGl({
   };
 
 export const MapContainer = ({ vesselsData }: MapContainerProps): ReactElement => {  
-    console.log(vesselsData)
     const classes = useStyles();
     const [showRoutes, setShowRoutes] = useState<boolean[]>(new Array(vesselsData.vessels.length).fill(false));
     const [showPopups, setShowPopups] = useState<boolean[]>(new Array(vesselsData.vessels.length).fill(false));

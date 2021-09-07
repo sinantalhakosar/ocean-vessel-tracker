@@ -120,9 +120,7 @@ const useStyles = makeStyles((theme) => ({
     const handleFormSubmit = async (e: any, onSubmitFunc: (formValues: FormData) => void) => {
         e.preventDefault();
         if (formIsValid()) {
-          //await postContactForm(values);
           onSubmitFunc(values)
-          alert("You've posted your form!")
         }
     };
     const formIsValid = (fieldValues = values) => {

@@ -24,7 +24,6 @@ export const upload = (stringifiedFile: Array<any>) => {
     return fetch(`${localURL}/search/upload`, requestOptions)
         .then(handleResponse)
         .then(data => {
-            console.log(data)
             return data;
         });
 }
