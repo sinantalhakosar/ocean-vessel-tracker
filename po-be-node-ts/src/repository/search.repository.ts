@@ -29,7 +29,20 @@ export const deleteAllAISData = async () => {
  * @returns List of vessels
  */
 export const findAISDataByFilters = async ({country, location, startDate, endDate, distance, showIdleVessels}: IFilter) => {
-    const exludeParameter = showIdleVessels ? { DEST:  "" } : {};
+    console.log(showIdleVessels)
+    const searchParameter = showIdleVessels ? 
+        {
+            "TYPE": {$gt : 79, $lt : 90},
+            $or: [
+                {"DEST" : location},
+                {"DEST" : ""},
+            ]
+        }
+        :
+        {
+            "TYPE": {$gt : 79, $lt : 90},
+            "DEST" : location,
+        };
 
     /**
      * Below commented query is 1st attemp, which ideally should make search with multiple conditions, 
@@ -44,20 +57,24 @@ export const findAISDataByFilters = async ({country, location, startDate, endDat
     //     exludeParameter
     // ).select({ "_id": 0, "TIME": 0, "TYPE": 0});
 
-    let searchResult =  await Search.find({
-        "TYPE": {$gt : 79, $lt : 90},
-        "DEST" : location,
-        },
-        exludeParameter
-    );
+    let searchResult =  await Search.find(searchParameter);
 
     if(searchResult.length == 0){
-        searchResult = await Search.find({
+        const searchParameterOnSecond = showIdleVessels ? 
+        {
+            "TYPE": {$gt : 79, $lt : 90},
+            $or: [
+                {"DEST" : { $regex: '.*' + location + '.*' }},
+                {"DEST" : ""},
+            ]
+        }
+        :
+        {
             "TYPE": {$gt : 79, $lt : 90},
             "DEST" : { $regex: '.*' + location + '.*' },
-            },
-            exludeParameter
-        );
+        };
+
+        searchResult = await Search.find(searchParameterOnSecond);
     }
     return searchResult.filter((result) => result.ETA > new Date(startDate) && result.ETA < new Date(endDate));
 }
