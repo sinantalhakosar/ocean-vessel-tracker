@@ -29,7 +29,6 @@ export const deleteAllAISData = async () => {
  * @returns List of vessels
  */
 export const findAISDataByFilters = async ({country, location, startDate, endDate, distance, showIdleVessels}: IFilter) => {
-    console.log(showIdleVessels)
     const searchParameter = showIdleVessels ? 
         {
             "TYPE": {$gt : 79, $lt : 90},
