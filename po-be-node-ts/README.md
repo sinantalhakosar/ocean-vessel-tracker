@@ -21,6 +21,13 @@
 
 `src/types`: Have necessary interfaces for the project
 
+## Collection Names
+- `searches`: For AIS data, without some fields
+- `ports`: `code-list_csv.csv` data that you provide with modifications
+
+## Data Analysis
+There are some `Python` files to upload the files provided to database, some filtering operations exists to drop unnecessary fields from the data. See files under `src/helpers`, files are commented for you to understand
+
 ## Problems & Proposals
 #### Bad usage of Cors
 Problem: I need to enable `cors` to get the request from FE properly, but defined with allowing anything from `localhost:5000`
