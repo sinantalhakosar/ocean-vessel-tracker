@@ -1,8 +1,7 @@
 import { Document, Schema, Model, model} from "mongoose";
-import { ISearch } from "../types/search";
+import { ISearch } from "../types/search.type";
 
-export interface ISearchModel extends ISearch, Document {
-}
+export interface ISearchModel extends ISearch, Document {}
 
 export const SearchSchema: Schema = new Schema({
     TIME: Date,

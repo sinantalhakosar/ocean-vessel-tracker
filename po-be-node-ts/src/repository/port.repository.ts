@@ -1,5 +1,5 @@
-import { Port, IPortModel } from '../models/ports';
-import { IPort } from '../types/ports';
+import { Port, IPortModel } from '../models/port.model';
+import { IPort } from '../types/port.type';
 
 export async function getAllPortsUNLOCODE() {
   return Port.find({}).select({ "UNLOCODE": 1, "Name": 1,"_id": 0});

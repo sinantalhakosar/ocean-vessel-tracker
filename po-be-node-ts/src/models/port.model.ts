@@ -1,8 +1,7 @@
 import { Document, Schema, Model, model} from "mongoose";
-import { IPort } from "../types/ports";
+import { IPort } from "../types/port.type";
 
-export interface IPortModel extends IPort, Document {
-}
+export interface IPortModel extends IPort, Document {}
 
 export const PortSchema: Schema = new Schema({
     country: String,

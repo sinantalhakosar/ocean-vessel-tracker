@@ -1,5 +1,5 @@
 import express from 'express';
-import { makeSearch, upload } from '../controllers/searches';
+import { makeSearch, upload } from '../controllers/search.controller';
 
 const searchRouter = express.Router();
 

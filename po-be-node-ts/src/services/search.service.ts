@@ -1,16 +1,7 @@
-import { Search, ISearchModel } from '../models/search';
-import { ISearch, IFilter } from '../types/search';
-import { getCoordinatesByDest } from '../repo/ports';
-import { findAISDataByFilters as findAISDataByFiltersRepo } from '../repo/search.repo';
+import { IFilter } from '../types/search.type';
+import { getCoordinatesByDest } from '../repository/port.repository';
+import { findAISDataByFilters as findAISDataByFiltersRepo } from '../repository/search.repository';
 
-const hasNumber = (anystring: string) => {
-    return /\d/.test(anystring);
-}
-
-const replaceChars = (anyString: string, search: string, newChar: string) => {
-    const replacer = new RegExp(search, 'g')
-    return anyString.replace(replacer, newChar);
-}
 
 export const findAISDataByFilters = async ({selectedPort, startDate, endDate, distance, showIdleVessels}: Omit<IFilter, 'country' | 'location'> & {selectedPort: string}) => {
     const country = selectedPort.split('-')[0];

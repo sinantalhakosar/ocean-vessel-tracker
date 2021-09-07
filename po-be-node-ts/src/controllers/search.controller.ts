@@ -1,17 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { Port } from '../models/ports';
-import { createAISData, deleteAllAISData } from '../repo/search.repo';
+import { createAISData, deleteAllAISData } from '../repository/search.repository';
 import { findAISDataByFilters } from '../services/search.service';
-import { IPort } from "../types/ports";
-import { IFilter, ISearch } from "../types/search";
+import { ISearch } from "../types/search.type";
 
-interface Search {
-    port: string;
-    startDate: string;
-    endDate: string;
-    distance: number;
-    showIdles: boolean;
-}
 
 export const upload = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -38,9 +29,13 @@ export const upload = async (req: Request, res: Response, next: NextFunction) =>
 }
 
 export const makeSearch = async (req: Request, res: Response, next: NextFunction) => {
-    let filters = req.body;
-    console.log(filters)
-    const result = await findAISDataByFilters(filters)
-
-    return res.status(200).json({data:result});
+    try{
+        let filters = req.body;
+        const result = await findAISDataByFilters(filters)
+    
+        return res.status(200).json({data:result});
+    } catch(error){
+        return res.status(500).json({message:'Internal server error'});
+    }
+    
 };

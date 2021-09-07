@@ -1,19 +1,15 @@
 import http from 'http';
 import express, { Express } from 'express';
-import searchRouter from './routes/searches';
+import searchRouter from './routes/search.route';
 import portRouter from './routes/port.route';
-import {connect} from './configs/database'
+import {connect} from './configs/database.config'
 var cors = require('cors');
-
-// use it before all route definitions
 
 const router: Express = express();
 connect();
 
 router.use(cors({origin: 'http://localhost:5000'}));
-/** Parse the request */
 router.use(express.urlencoded({ extended: false }));
-/** Takes care of JSON data */
 router.use(express.json());
 
 
