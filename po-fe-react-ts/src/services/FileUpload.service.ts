@@ -1,4 +1,5 @@
 import { localURL } from '../utils/url.util';
+import { handleResponse } from './ResponseHandler.service';
 
 export const upload = (stringifiedFile: Array<any>) => {
     stringifiedFile.forEach((el) => {
@@ -26,17 +27,4 @@ export const upload = (stringifiedFile: Array<any>) => {
         .then(data => {
             return data;
         });
-}
-
-
-export const handleResponse = (response: any) => {
-    return response.text().then((text: any) => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
 }

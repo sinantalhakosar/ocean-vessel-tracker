@@ -1,5 +1,6 @@
 import { localURL } from '../utils/url.util';
 import { FormData } from '../components/SearchFieldsForm';
+import { handleResponse } from './ResponseHandler.service';
 
 export const searchWithFilters = (filterValues: FormData) => {
     const requestOptions = {
@@ -24,14 +25,3 @@ export const getPorts = async () => {
 }
 
 
-export const handleResponse = (response: any) => {
-    return response.text().then((text: any) => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-
-        return data;
-    });
-}
