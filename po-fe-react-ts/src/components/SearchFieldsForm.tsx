@@ -126,8 +126,8 @@ const useStyles = makeStyles((theme) => ({
     const formIsValid = (fieldValues = values) => {
         const isValid =
         fieldValues.selectedPort &&
-        fieldValues.startDate &&
-        fieldValues.endDate &&
+        //fieldValues.startDate &&
+        //fieldValues.endDate &&
         fieldValues.distance &&
         Object.values(errors).every((x) => x === "");
   

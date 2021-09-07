@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
  
 export interface FileUploadProps {
-    onUpload: (stringifiedFile: Array<any>) => void;
+    onUpload: (stringifiedFile: Array<any>) => any;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -27,8 +27,13 @@ export const FileUpload = ({onUpload}: FileUploadProps): ReactElement => {
         }
         const fileReader = new FileReader();
         fileReader.readAsText(event.target.files[0], "UTF-8");
-        fileReader.onload = (e) => {
-            onUpload(JSON.parse(fileReader.result as string))
+        fileReader.onload = async (e) => {
+            const uploadResponse = await onUpload(JSON.parse(fileReader.result as string))
+            if(uploadResponse.message !== 'New data loaded'){
+                alert('There are some error on file upload');
+            }else {
+                alert('File uploaded successfully');
+            }
         };
       };
 

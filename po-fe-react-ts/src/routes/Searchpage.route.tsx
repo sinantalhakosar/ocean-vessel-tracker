@@ -24,8 +24,11 @@ export const SearchPage = (): ReactElement => {
       }, []);
 
       const handleSubmit = async (filterValues: FormData) => {
-        const filteredVessels = await searchWithFilters(filterValues);
-        setVesselsData(filteredVessels.data)
+        const filteredVessels: {data: {vessels: [], port: {}}} = await searchWithFilters(filterValues);
+        setVesselsData(filteredVessels.data);
+        if(filteredVessels.data.vessels.length === 0) {
+            alert('No data found, please try with different inputs')
+        }
       }
 
     return (
