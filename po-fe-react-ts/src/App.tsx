@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
-import { SearchPage } from './routes/Searchpage';
-import { UploadPage } from './routes/UploadPage';
+import { SearchPage } from './routes/Searchpage.route';
+import { UploadPage } from './routes/UploadPage.route';
 
 function App() {
   return (
