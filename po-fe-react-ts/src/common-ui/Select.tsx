@@ -1,5 +1,4 @@
-import type { ReactElement } from 'react';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { FormControl, TextField } from '@material-ui/core';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import { makeStyles } from '@material-ui/core/styles';

@@ -15,6 +15,7 @@ export const DateTimePicker = ({ label, onChange }: DateTimePickerProps): ReactE
         onChange(selectedDate);
     };
 
+    // useMemo to not calculating the date again when any action happens on same date
     const todaysDefaultDate = useMemo(() => {
       var d = new Date(todaysDate);
       d.setHours(24,0,0,0);

@@ -1,6 +1,9 @@
-import { localURL } from '../utils/url.util';
-import { handleResponse } from './ResponseHandler.service';
+import { localURL } from 'utils/url.util';
+import { handleResponse } from 'services/ResponseHandler.service';
 
+/**
+ * While uploading the data, below fields are unnecessary for this project, so I decided to remove them
+ */
 export const upload = (stringifiedFile: Array<any>) => {
     stringifiedFile.forEach((el) => {
         delete el.MMSI;

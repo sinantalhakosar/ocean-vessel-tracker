@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Button, Box } from '@material-ui/core';
-import { upload } from '../services/FileUpload.service';
-import { FileUpload } from '../components/FileUpload';
+import { upload } from 'services/FileUpload.service';
+import { FileUpload } from 'components/FileUpload';
 
 const Spacer = () => <Box display="inline" mr={4} />;
 

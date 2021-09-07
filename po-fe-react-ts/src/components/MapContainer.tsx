@@ -1,5 +1,4 @@
-import type { ReactElement } from 'react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, ReactElement } from 'react';
 import ReactMapboxGl, { GeoJSONLayer, Marker, Popup } from 'react-mapbox-gl';
 import * as MapboxGL from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';

@@ -1,10 +1,10 @@
 import { ReactElement, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { SearchFieldsForm } from '../components/SearchFieldsForm';
-import { MapContainer } from '../components/MapContainer';
 import { Grid, Button } from '@material-ui/core';
-import { searchWithFilters, getPorts } from '../services/Search.service'
-import { FormData } from '../components/SearchFieldsForm';
+import { SearchFieldsForm } from 'components/SearchFieldsForm';
+import { MapContainer } from 'components/MapContainer';
+import { searchWithFilters, getPorts } from 'services/Search.service'
+import { FormData } from 'components/SearchFieldsForm';
 
 export const SearchPage = (): ReactElement => {  
     const [ports, setPorts] = useState<Array<{UNLOCODE:string, Name: string}>>([]);

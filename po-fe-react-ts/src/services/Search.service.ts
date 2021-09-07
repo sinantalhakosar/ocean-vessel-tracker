@@ -1,6 +1,6 @@
-import { localURL } from '../utils/url.util';
-import { FormData } from '../components/SearchFieldsForm';
-import { handleResponse } from './ResponseHandler.service';
+import { localURL } from 'utils/url.util';
+import { FormData } from 'components/SearchFieldsForm';
+import { handleResponse } from 'services/ResponseHandler.service';
 
 export const searchWithFilters = (filterValues: FormData) => {
     const requestOptions = {

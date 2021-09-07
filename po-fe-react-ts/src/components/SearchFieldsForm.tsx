@@ -1,9 +1,8 @@
-import { ReactElement, useState } from 'react';
-import { ChangeEvent } from 'react';
+import { ReactElement, useState, ChangeEvent } from 'react';
 import { TextField, Grid, Tooltip, Button } from '@material-ui/core';
-import { Select } from '../common-ui/Select';
-import { DateTimePicker } from '../common-ui/DateTimePicker';
-import { Checkbox } from '../common-ui/Checkbox';
+import { Select } from 'common-ui/Select';
+import { DateTimePicker } from 'common-ui/DateTimePicker';
+import { Checkbox } from 'common-ui/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import Help from '@material-ui/icons/Help';
 import clsx from 'clsx';
