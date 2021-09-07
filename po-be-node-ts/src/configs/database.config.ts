@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 let database: mongoose.Connection;
 
+/**
+ * Database connection configurations
+ * Connect MongoDB atlas by provided URI from .env file in root folder of BE project
+ */
 export const connect = () => {
 
     const DB_CONNECTION_URI = process.env.DB_CONNECTION_URI!;
@@ -31,6 +35,9 @@ export const connect = () => {
 
 };
 
+/**
+ * Disconnect MongoDB atlas
+ */
 export const disconnect = () => {
     
     if (!database) {

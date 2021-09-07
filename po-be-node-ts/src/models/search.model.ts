@@ -3,6 +3,9 @@ import { ISearch } from "../types/search.type";
 
 export interface ISearchModel extends ISearch, Document {}
 
+/**
+ * Model inside database
+ */
 export const SearchSchema: Schema = new Schema({
     TIME: Date,
     LONGITUDE: Number,

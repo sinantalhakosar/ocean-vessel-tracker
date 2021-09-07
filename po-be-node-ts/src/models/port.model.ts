@@ -3,6 +3,9 @@ import { IPort } from "../types/port.type";
 
 export interface IPortModel extends IPort, Document {}
 
+/**
+ * Model inside database
+ */
 export const PortSchema: Schema = new Schema({
     country: String,
     location: String,

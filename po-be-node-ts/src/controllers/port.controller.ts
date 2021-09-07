@@ -10,6 +10,14 @@ export const addPort = async (req: Request, res: Response, next: NextFunction) =
     });
 };
 
+/**
+ * [GET]
+ * Endpoint for getting all ports inside database
+ * @param req 
+ * @param res 
+ * @param next 
+ * @returns Response having list of ports
+ */
 export const getAllUnlocodeOfPorts = async (req: Request, res: Response, next: NextFunction) => {
     try{
         const ports = await getAllPortsUNLOCODE();
