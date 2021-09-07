@@ -23,5 +23,3 @@ export const getPorts = async () => {
     
     return fetch(`${localURL}/port/get-ports`, requestOptions).then(data => data.json())
 }
-
-

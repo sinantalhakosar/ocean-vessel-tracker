@@ -13,4 +13,6 @@ In this document I will explain somethings more detailed item by item
 
 - Keeping things more clean: Prettier can be implemented, but only before commit, some developers setting it on save and it is really annoying to see changes when I hit save ﴾͡๏̯͡๏﴿ O'RLY?
 
+- Renaming of the files: I put prefix to the files, to be able to distinguish in the future works (in tests maybe)
+
 - Future Work: I put `What can be improved` section because I really liked the project and spend time to think about what can be done better and further (ง'̀-'́)ง
