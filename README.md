@@ -4,7 +4,7 @@ This project is for tracking the tanker vessels with provided search parameters 
 
 ## Installation
 
-1. Run `yarn` inside `po-fe-react-ts` to install dependencies for frontend
+1. Run `yarn` inside `po-fe-react-ts` and `po-be-node-ts` to install dependencies for frontend
 2. Run `yarn dev` inside `po-be-node-ts` to start backend
 3. Run `yarn start` inside `po-fe-react-ts` to start frontend
 
