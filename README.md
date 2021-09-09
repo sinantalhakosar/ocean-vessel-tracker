@@ -7,6 +7,7 @@ This project is for tracking the tanker vessels with provided search parameters 
 1. Run `yarn` inside `po-fe-react-ts` and `po-be-node-ts` to install dependencies for frontend
 2. Run `yarn dev` inside `po-be-node-ts` to start backend
 3. Run `yarn start` inside `po-fe-react-ts` to start frontend
+4. Add API_KEY for Mapbox and connection URI for MongoDB inside `.env` files
 
 ## How To Use?
 Open `localhost:5000`, you will see form & empty map
