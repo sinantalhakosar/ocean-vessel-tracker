@@ -1,4 +1,4 @@
-# PROJECT OCEAN
+# PROJECT OCEAN VESSEL TRACKER
 
 This project is for tracking the tanker vessels with provided search parameters via map.
 
